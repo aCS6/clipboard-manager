@@ -1,0 +1,13 @@
+[Unit]
+Description=Clipboard Manager
+After=graphical-session.target
+PartOf=graphical-session.target
+
+[Service]
+Environment=GDK_BACKEND=x11
+ExecStart=clipboard-manager
+Restart=on-failure
+RestartSec=3
+
+[Install]
+WantedBy=graphical-session.target

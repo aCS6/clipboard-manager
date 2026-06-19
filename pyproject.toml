@@ -1,0 +1,38 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.backends.legacy:build"
+
+[project]
+name = "clipboard-manager"
+version = "1.0.0"
+description = "A lightweight clipboard history manager for Ubuntu/GNOME"
+readme = "README.md"
+license = { text = "MIT" }
+requires-python = ">=3.12"
+authors = [{ name = "aCS6", email = "amir.cse006@gmail.com" }]
+keywords = ["clipboard", "gnome", "gtk", "ubuntu", "history"]
+classifiers = [
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3.12",
+    "Operating System :: POSIX :: Linux",
+    "Environment :: X11 Applications :: GTK",
+    "Topic :: Desktop Environment",
+]
+# PyGObject must come from the system (python3-gi); no pip dep listed.
+dependencies = []
+
+[project.urls]
+Homepage = "https://github.com/aCS6/clipboard-manager"
+
+[project.scripts]
+clipboard-manager = "clipboard_manager.__main__:main"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["clipboard_manager*"]
+
+[tool.setuptools.package-data]
+clipboard_manager = ["../data/icons/*.svg"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

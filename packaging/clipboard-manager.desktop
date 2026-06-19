@@ -1,0 +1,12 @@
+[Desktop Entry]
+Type=Application
+Name=Clipboard Manager
+GenericName=Clipboard History
+Comment=Lightweight clipboard history manager for GNOME
+Exec=env GDK_BACKEND=x11 clipboard-manager
+Icon=clipboard-manager
+Terminal=false
+StartupNotify=false
+Categories=Utility;GTK;
+Keywords=clipboard;history;copy;paste;
+X-GNOME-Autostart-enabled=true

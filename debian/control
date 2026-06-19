@@ -1,0 +1,20 @@
+Source: clipboard-manager
+Section: utils
+Priority: optional
+Maintainer: aCS6 <amir.cse006@gmail.com>
+Build-Depends: debhelper-compat (= 13), dh-python, python3-all
+Standards-Version: 4.6.0
+Rules-Requires-Root: no
+Homepage: https://github.com/aCS6/clipboard-manager
+
+Package: clipboard-manager
+Architecture: all
+Depends: ${python3:Depends}, ${misc:Depends},
+ python3-gi,
+ gir1.2-gtk-3.0,
+ gir1.2-ayatanaappindicator3-0.1,
+ gir1.2-gdkpixbuf-2.0
+Description: Lightweight clipboard history manager for GNOME
+ Automatically captures copied text and images into a searchable history.
+ Features a tray-icon-triggered popup to browse, search, pin, copy, and
+ delete clipboard history items. Designed for Ubuntu 24.04 / GNOME 46.
