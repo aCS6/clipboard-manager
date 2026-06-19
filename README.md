@@ -18,8 +18,8 @@ A lightweight clipboard history manager for Ubuntu 24.04 / GNOME 46.
 
 ```bash
 wget https://github.com/aCS6/clipboard-manager/releases/latest/download/clipboard-manager_1.0.2-1_all.deb
+chmod a+r clipboard-manager_1.0.2-1_all.deb
 sudo apt install ./clipboard-manager_1.0.2-1_all.deb
-clipboard-manager
 ```
 
 `apt install ./` automatically pulls in all required dependencies. The app appears in your GNOME app grid after install.
