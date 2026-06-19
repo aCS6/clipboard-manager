@@ -30,11 +30,14 @@ pip-build:
 	python3 -m build
 	@echo "Upload with: python3 -m twine upload dist/*"
 
-# Build .deb package
+# Build .deb package → packages/
 deb:
-	sudo apt install -y debhelper dh-python python3-all python3-build
+	sudo apt install -y debhelper dh-python python3-all pybuild-plugin-pyproject python3-setuptools
 	dpkg-buildpackage -us -uc -b
-	@echo "Install with: sudo dpkg -i ../clipboard-manager_*.deb"
+	mkdir -p packages
+	mv ../clipboard-manager_*.deb packages/
+	@echo "Built: packages/clipboard-manager_*.deb"
+	@echo "Install with: sudo dpkg -i packages/clipboard-manager_*.deb"
 
 # Enable autostart for current user
 autostart-enable:

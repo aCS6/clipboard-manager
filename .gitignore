@@ -12,3 +12,7 @@ build/
 history.db
 images/
 config.json
+# build artifacts
+packages/*.deb
+*.buildinfo
+*.changes
