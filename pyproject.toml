@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "clipboard-manager"
-version = "1.0.1"
+version = "1.0.2"
 description = "A lightweight clipboard history manager for Ubuntu/GNOME"
 readme = "README.md"
 license = { text = "MIT" }

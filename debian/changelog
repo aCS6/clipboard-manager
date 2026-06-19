@@ -1,3 +1,9 @@
+clipboard-manager (1.0.2-1) noble; urgency=low
+
+  * Kill running process and remove autostart on uninstall
+
+ -- aCS6 <amir.cse006@gmail.com>  Fri, 19 Jun 2026 15:10:00 +0600
+
 clipboard-manager (1.0.1-1) noble; urgency=low
 
   * Auto-enable autostart on login after install
