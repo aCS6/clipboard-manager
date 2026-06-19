@@ -4,40 +4,33 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![Python 3.12+](https://img.shields.io/badge/python-3.12+-blue.svg)](https://www.python.org/)
 [![Platform: Ubuntu 24.04](https://img.shields.io/badge/platform-Ubuntu%2024.04-orange.svg)](https://ubuntu.com/)
+[![Latest Release](https://img.shields.io/github/v/release/aCS6/clipboard-manager)](https://github.com/aCS6/clipboard-manager/releases/latest)
 
 A lightweight clipboard history manager for Ubuntu 24.04 / GNOME 46.
 
-**Features:** automatic text & image capture, searchable history, delete, private mode, tray icon, corner-anchored popup.
+**Features:** automatic text & image capture, history popup, delete, private mode, tray icon, corner-anchored popup.
 
 ---
 
-## Running the app
+## ⬇️ Install (easiest)
 
-**1. Install system dependencies (one-time):**
+**Download the `.deb` from the [latest release](https://github.com/aCS6/clipboard-manager/releases/latest) and install:**
+
 ```bash
-sudo apt install python3-gi gir1.2-gtk-3.0 gir1.2-ayatanaappindicator3-0.1 gir1.2-gdkpixbuf-2.0
+# Download
+wget https://github.com/aCS6/clipboard-manager/releases/latest/download/clipboard-manager_1.0.0-1_all.deb
+
+# Install system dependencies
+sudo apt install -y python3-gi gir1.2-gtk-3.0 gir1.2-ayatanaappindicator3-0.1 gir1.2-gdkpixbuf-2.0
+
+# Install the .deb
+sudo dpkg -i clipboard-manager_1.0.0-1_all.deb
+
+# Run
+clipboard-manager
 ```
 
-**2. Run:**
-```bash
-git clone https://github.com/aCS6/clipboard-manager
-cd clipboard-manager
-make run
-```
-
-A clipboard icon appears in the GNOME top bar. Left-click opens history, right-click for menu.
-
-**If the tray icon doesn't show**, verify the AppIndicator extension is enabled:
-```bash
-gnome-extensions list --enabled | grep appindicator
-# If missing:
-gnome-extensions enable appindicator@rgcjonas.gmail.com
-```
-
-**To test the watcher headlessly** (no UI):
-```bash
-make watch
-```
+That's it. The app appears in your GNOME app grid and starts automatically on login.
 
 ---
 
@@ -48,44 +41,48 @@ make watch
 - **🗑 icon** on each row → deletes that entry
 - **Private mode** (footer toggle) → pauses capture without quitting
 - **Settings** (right-click tray → Settings) → history limit, poll interval, popup position, autostart
-- **Clear all** (popup footer) → clears unpinned history with confirmation
+- **Clear all** (popup footer) → clears history with confirmation
 
 ---
 
-## Quick install options
+## Run from source
 
-### Run from source (recommended for now)
 ```bash
+# Install system dependencies
 sudo apt install python3-gi gir1.2-gtk-3.0 gir1.2-ayatanaappindicator3-0.1 gir1.2-gdkpixbuf-2.0
+
 git clone https://github.com/aCS6/clipboard-manager
 cd clipboard-manager
 make run
-```
-
-### pip _(coming soon — see [#roadmap](#roadmap))_
-```bash
-pip install clipboard-manager
-clipboard-manager
-```
-
-### apt / PPA _(coming soon — see [#roadmap](#roadmap))_
-```bash
-sudo add-apt-repository ppa:aCS6/clipboard-manager
-sudo apt install clipboard-manager
 ```
 
 ---
 
 ## Autostart
 
-Enable from Settings dialog, or manually:
+Enable from the Settings dialog in the app, or manually:
+
 ```bash
 make autostart-enable
 ```
 
 Or as a systemd user service:
+
 ```bash
 make service-install
+```
+
+---
+
+## Uninstall
+
+```bash
+# If installed via .deb
+sudo dpkg -r clipboard-manager
+
+# Remove user data
+rm -rf ~/.local/share/clipboard-manager ~/.config/clipboard-manager
+rm -f ~/.config/autostart/clipboard-manager.desktop
 ```
 
 ---
@@ -93,19 +90,20 @@ make service-install
 ## Development
 
 ```bash
-make test       # run pytest (no display needed)
-make run        # run the app
-make watch      # run headless watcher
-make clean      # clean build artifacts
+make test    # run pytest (no display needed)
+make run     # run the app
+make watch   # headless watcher
+make deb     # build .deb → packages/
+make clean   # clean artifacts
 ```
 
-See [CONTRIBUTING.md](CONTRIBUTING.md) for full contribution guide.
+See [CONTRIBUTING.md](CONTRIBUTING.md).
 
 ---
 
 ## Architecture note (Wayland)
 
-GNOME's Mutter does **not** implement `wlr-data-control`, so background clipboard access requires running as an **XWayland client** (`GDK_BACKEND=x11`). Set automatically by the launcher. Same approach used by CopyQ.
+GNOME's Mutter does **not** implement `wlr-data-control`, so background clipboard access requires running as an **XWayland client** (`GDK_BACKEND=x11`). Set automatically by the launcher and `.desktop` file. Same approach used by CopyQ.
 
 ---
 
@@ -122,30 +120,13 @@ GNOME's Mutter does **not** implement `wlr-data-control`, so background clipboar
 
 ## Roadmap
 
-- [ ] **Publish to PyPI** — `make pip-build` then `twine upload`
-- [ ] **Publish to Ubuntu PPA** — `make deb` + Launchpad PPA upload
+- [ ] Publish to Ubuntu PPA (`apt install` without downloading `.deb`)
+- [ ] Publish to PyPI (`pip install clipboard-manager`)
 - [ ] Multi-monitor support
 - [ ] Global keyboard shortcut
 
 ---
 
-## Uninstall
-
-```bash
-make service-uninstall
-make autostart-disable
-make purge
-pip uninstall clipboard-manager   # if installed via pip
-```
-
----
-
-## Contributing
-
-See [CONTRIBUTING.md](CONTRIBUTING.md). Issues and PRs welcome.
-
----
-
 ## License
 
-MIT © 2026 aCS6
+MIT © 2026 [aCS6](https://github.com/aCS6)
