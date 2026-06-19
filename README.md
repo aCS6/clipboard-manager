@@ -69,12 +69,11 @@ make service-install
 ## Uninstall
 
 ```bash
-# If installed via .deb
-sudo dpkg -r clipboard-manager
+# Removes the app, kills the tray icon, disables autostart
+sudo apt remove clipboard-manager
 
-# Remove user data
+# Also remove your clipboard history and settings (optional)
 rm -rf ~/.local/share/clipboard-manager ~/.config/clipboard-manager
-rm -f ~/.config/autostart/clipboard-manager.desktop
 ```
 
 ---
