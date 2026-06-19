@@ -16,3 +16,11 @@ config.json
 packages/*.deb
 *.buildinfo
 *.changes
+# debian build artifacts
+debian/clipboard-manager/
+debian/.debhelper/
+debian/debhelper-build-stamp
+debian/files
+debian/*.substvars
+debian/*.postinst.debhelper
+debian/*.prerm.debhelper

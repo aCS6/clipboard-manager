@@ -1,2 +1,0 @@
-[console_scripts]
-clipboard-manager = clipboard_manager.__main__:main
