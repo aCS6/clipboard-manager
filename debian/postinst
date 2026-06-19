@@ -1,0 +1,30 @@
+#!/bin/sh
+set -e
+
+case "$1" in
+    configure)
+        # Enable autostart for every existing user (non-system, has a home dir)
+        getent passwd | awk -F: '$3 >= 1000 && $6 ~ /^\/home/ { print $6 }' | while read home; do
+            if [ -d "$home" ]; then
+                autostart_dir="$home/.config/autostart"
+                mkdir -p "$autostart_dir"
+                cp /usr/share/applications/clipboard-manager.desktop "$autostart_dir/clipboard-manager.desktop"
+                chown -R "$(stat -c '%U' "$home")" "$autostart_dir" 2>/dev/null || true
+            fi
+        done
+
+        # Launch the app in the background for the currently logged-in graphical user
+        GRAPHICAL_USER=$(who | awk '/(:0|tty[0-9])/ { print $1; exit }')
+        if [ -n "$GRAPHICAL_USER" ]; then
+            USER_HOME=$(getent passwd "$GRAPHICAL_USER" | cut -d: -f6)
+            DBUS=$(ls /run/user/$(id -u "$GRAPHICAL_USER" 2>/dev/null)/bus 2>/dev/null || \
+                   ls /run/user/*/bus 2>/dev/null | head -1)
+            if [ -n "$DBUS" ]; then
+                su -c "GDK_BACKEND=x11 DBUS_SESSION_BUS_ADDRESS=unix:path=$DBUS \
+                    nohup clipboard-manager >/dev/null 2>&1 &" "$GRAPHICAL_USER" || true
+            fi
+        fi
+        ;;
+esac
+
+#DEBHELPER#
