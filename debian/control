@@ -2,7 +2,7 @@ Source: clipboard-manager
 Section: utils
 Priority: optional
 Maintainer: aCS6 <amir.cse006@gmail.com>
-Build-Depends: debhelper-compat (= 13), dh-python, python3-all, pybuild-plugin-pyproject, python3-setuptools
+Build-Depends: debhelper-compat (= 13), dh-python, python3-all, pybuild-plugin-pyproject, python3-setuptools, build-essential
 Standards-Version: 4.6.0
 Rules-Requires-Root: no
 Homepage: https://github.com/aCS6/clipboard-manager
